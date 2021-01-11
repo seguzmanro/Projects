@@ -1,2 +1,2 @@
 # Projects
-Various miscellaneous projects, practices, ordered by language
+Various miscellaneous projects, mainly practices, ordered by language
