@@ -2,7 +2,7 @@ import os
 import random
 
 
-with open("./files/database.txt", "r", encoding="utf-8") as file_:
+with open("./proyecto_python_intermedio/files/database.txt", "r", encoding="utf-8") as file_:
     DATA = [line.removesuffix("\n") for line in file_]
 
 
