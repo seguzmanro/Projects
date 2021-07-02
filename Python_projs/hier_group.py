@@ -1,7 +1,23 @@
+'''
+This program is just a demonstration of the hierarchical grouping algorithm through euclidean distance.
+The program generates 10 random coordinates and then searches for the minor distance between any two points.
+Next it groups this pair in a set and replaces the points with its midpoint, starting again. 
+The end result is a string with the labels of the 10 points (a-j) grouped by parentheses.
+It also plots the points with its corresponding labels. 
+'''
+
 import random
 import math
 import uuid
-from bokeh.plotting import figure, show
+import matplotlib.pyplot as plt
+
+
+class coord:
+    def __init__(self, x, y, coord_label):
+        self.x = x
+        self.y = y    
+        self.coord_label = coord_label
+
 
 class arbol:
     def __init__(self, coord_1, coord_2=None, node_label=None):
@@ -26,13 +42,6 @@ def arbol_de_arboles(arbol_1, arbol_2):
     return arbol(arbol_1, arbol_2, node_label = '(' + arbol_1.node_label + ')' + arbol_2.node_label)
 
 
-class coord:
-    def __init__(self, x, y, coord_label):
-        self.x = x
-        self.y = y    
-        self.coord_label = coord_label
-
-
 def get_coord(vector_coords, coord_label):
     for i in vector_coords:
         if i.coord_label == coord_label:
@@ -52,6 +61,24 @@ def obt_dist_euc(coord_1, coord_2):
 
 def obt_coord_medio(coord_1, coord_2):
     return coord((coord_1.x + coord_2.x) / 2, (coord_1.y + coord_2.y) / 2, coord_label='(' + coord_1.coord_label + coord_2.coord_label + ')')
+
+
+def plot_points(vector_coords):
+    x=[]
+    y=[]
+    labels=[]
+    for coord in vector_coords:
+        x.append(coord.x)
+        y.append(coord.y)
+        labels.append(coord.coord_label)
+    plt.figure()
+    plt.scatter(x, y)
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Random Coordinates')
+    for i, label in enumerate(labels):
+        plt.annotate(label, (x[i], y[i]))
+    plt.show()
 
 
 def agrup_jerarq(vector_coords):
@@ -79,7 +106,5 @@ def agrup_jerarq(vector_coords):
 
 if __name__ == '__main__':
     vector_coords = [gen_coords(i) for i in ['a','b','c','d','e','f','g','h','i','j']]
+    plot_points(vector_coords)
     print(agrup_jerarq(vector_coords).node_label)
-
-    
-
